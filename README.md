@@ -3,6 +3,9 @@
 ## Overview
 This module is designed to enhance the capabilities of ERPNext in managing transportation and logistics operations. It integrates various functionalities including vehicle management, trip planning, document management, expense tracking, and compliance checks. This module aims to streamline operations, ensure regulatory compliance, and optimize route and resource allocation.
 
+
+![Transport Management Process Flow](https://user-images.githubusercontent.com/35020381/188545105-8867a66b-d413-4b35-ab6c-13a2979928df.png)
+
 ## Features
 - **Document Management**: Manage and track driver and vehicle documents with automatic alerts for document expiry.
 - **Vehicle Tracking**: Real-time tracking of vehicle locations, statuses, and operational metrics.
