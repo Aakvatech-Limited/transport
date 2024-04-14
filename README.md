@@ -23,7 +23,7 @@ This module is designed to enhance the capabilities of ERPNext in managing trans
 1. Clone the repository:
    ```bash
    git clone https://github.com/aakvatech/transport.git
-   cd transportation_management_system
+   cd transms
    ```
 
 2. Install the module:
