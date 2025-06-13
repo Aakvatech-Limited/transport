@@ -11,7 +11,7 @@ from frappe import _
 import json
 from frappe.utils import nowdate
 from trans_ms.utlis.dimension import set_dimension
-
+from frappe.model.naming import make_autoname
 
 class TransportationOrder(Document):
     def validate(self):
@@ -354,6 +354,23 @@ def create_sales_invoice(doc, rows):
             items=items,
         ),
     )
+
+    # Set dynamic dept_abbr for naming series
+    # You may adjust this lookup based on actual source (e.g. department field on customer, or company code)
+    dept_abbr = ""
+    if hasattr(doc, "department_abbr"):
+        dept_abbr = doc.department_abbr
+    elif frappe.db.has_column("Customer", "department_abbr"):
+        dept_abbr = frappe.db.get_value("Customer", doc.customer, "department_abbr")
+    elif frappe.db.has_column("Company", "abbr"):
+        dept_abbr = frappe.db.get_value("Company", doc.company, "abbr")
+
+    if not dept_abbr:
+        frappe.throw("Missing department abbreviation (dept_abbr) for naming series.")
+
+    # Manually assign name using dynamic naming pattern
+    invoice.naming_series = None  # override automatic series assignment
+    invoice.name = make_autoname(f"ACC-SINV-{dept_abbr}-.YYYY.-")
 
     set_dimension(doc, invoice, src_child=row)
     for i in item_row_per:
