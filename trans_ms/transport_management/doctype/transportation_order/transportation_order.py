@@ -330,8 +330,10 @@ def create_sales_invoice(doc, rows):
     item_row_per = []
     for row in rows:
         description = ""
-        if row["assigned_vehicle"]:
+        if row["transporter_type"] == "In House":
             description += "<b>VEHICLE NUMBER: " + row["assigned_vehicle"]
+        elif row["transporter_type"] == "Sub-Contractor":
+            description += "<b>VEHICLE NUMBER: " + row["vehicle_plate_number"]
         if row["route"]:
             description += "<BR>ROUTE: " + row["route"]
         item = frappe._dict({
